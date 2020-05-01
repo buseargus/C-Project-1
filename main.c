@@ -3,45 +3,45 @@
 
 int main()
 {
-    int buyukHarfler = 0;
-    int kucukHarfler = 0;
-    int noktalama = 0;
-    int kelimeler = 0;
-    int sayilar = 0;
+    int upperCase = 0;
+    int lowerCase = 0;
+    int punctuation = 0;
+    int word = 0;
+    int digit = 0;
     char s;
-    FILE *dosya;
+    FILE *file;
 
-    if ((dosya = fopen("a.txt","r")) == NULL)
+    if ((file = fopen("a.txt","r")) == NULL)
         printf("Dosya okumada hata var.");
     else{
         int flag = 1;
-        while (!feof(dosya)){
-            s = fgetc(dosya);
+        while (!feof(file)){
+            s = fgetc(file);
             if (isupper(s)) {
-                buyukHarfler++;
+                upperCase++;
             } else if (islower(s)) {
-                kucukHarfler++;
+                lowerCase++;
             } else if (isdigit(s)) {
-                sayilar++;
+                digit++;
                 flag = 0;
             } else if (ispunct(s)) {
-                noktalama++;
+                punctuation++;
                 if(flag == 1) {
-                    kelimeler++;
+                    word++;
                 }
                 flag = 1;
 
             } else if (isspace(s)) {
                 if(flag == 1) {
-                    kelimeler++;
+                    word++;
                 }
                 flag = 1;
             }
         }
 
-        fclose(dosya);
+        fclose(file);
         }
-    printf("Kelime sayisi = %d, buyuk harf sayisi = %d, kucuk harf sayisi = %d, noktalama isareti sayisi = %d, rakam sayisi = %d",
-           kelimeler, buyukHarfler, kucukHarfler, noktalama, sayilar);
+    printf("Words = %d, Uppercase letters = %d, Lowercase letters = %d, Punctuation marks = %d, Numbers = %d",
+           word, upperCase, lowerCase, punctuation, digit);
     return 0;
 }
