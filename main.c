@@ -12,7 +12,7 @@ int main()
     FILE *file;
 
     if ((file = fopen("a.txt","r")) == NULL)
-        printf("Dosya okumada hata var.");
+        printf("Error.");
     else{
         int flag = 1;
         while (!feof(file)){
